@@ -1,52 +1,49 @@
 import platform
 
 
-current_os = platform.system()
-
-if current_os == "Darwin":
-    print("Mac")
-elif current_os == "Linux":
-    print("Linux")
-elif current_os == "Windows":
-    print("Windows")
-else:
-    print("Unknown OS")
-
-
-class Korean:
+class Linux:
     def __init__(self):
-        self.name = "Korean"
+        self.name = "Linux"
 
-    def speak_korean(self):
-        return "An-neyong?"
+    def run(self):
+        return f"{self.name} version is running"
 
 
-class British:
+class Mac:
     def __init__(self):
-        self.name = "British"
+        self.name = "Mac"
 
-    def speak_english(self):
-        return "Hello!"
+    def run(self):
+        return f"{self.name} version is running"
+
+
+class Windows:
+    def __init__(self):
+        self.name = "Windows"
+
+    def run(self):
+        return f"{self.name} version is running"
 
 
 class Adapter:
-    def __init__(self, object, **adapted_method):
-        self._object = object
+    def __init__(self):
+        self._check_os = platform.system()
+        self._run_os = None
+        self._check_system()
 
-        self.__dict__.update(adapted_method)
+    def _check_system(self):
+        if self._check_os == "Linux":
+            self._run_os = Linux()
+        elif self._check_os == "Darwin":
+            self._run_os = Mac()
+        elif self._check_os == "Windows":
+            self._run_os = Windows()
+        else:
+            print("Unknown OS")
 
-    def __getattr__(self, attr):
-        return getattr(self._object, attr)
+    def show(self):
+        print(self._run_os.run())
 
 
-objects = []
-
-korean = Korean()
-
-british = British()
-
-objects.append(Adapter(korean, speak=korean.speak_korean))
-objects.append(Adapter(british, speak=british.speak_english))
-
-for obj in objects:
-    print(f"{obj.name} says '{obj.speak()}'\n")
+a = Adapter()
+a.show()
