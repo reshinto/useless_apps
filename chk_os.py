@@ -1,49 +1,25 @@
 import platform
 
 
-class Linux:
-    def __init__(self):
-        self.name = "Linux"
-
-    def run(self):
-        return f"{self.name} version is running"
-
-
-class Mac:
-    def __init__(self):
-        self.name = "Mac"
-
-    def run(self):
-        return f"{self.name} version is running"
-
-
-class Windows:
-    def __init__(self):
-        self.name = "Windows"
-
-    def run(self):
-        return f"{self.name} version is running"
-
-
 class Adapter:
-    def __init__(self):
+    def __init__(self, run_app):
         self._check_os = platform.system()
         self._run_os = None
-        self._check_system()
+        self._check_system(run_app)
 
-    def _check_system(self):
+    def _check_system(self, run_app):
         if self._check_os == "Linux":
-            self._run_os = Linux()
+            self._run_os = run_app
         elif self._check_os == "Darwin":
-            self._run_os = Mac()
+            self._run_os = run_app
         elif self._check_os == "Windows":
-            self._run_os = Windows()
+            self._run_os = run_app
         else:
             print("Unknown OS")
 
-    def show(self):
-        print(self._run_os.run())
+    def run(self):
+        return self._run_os
 
 
 a = Adapter()
-a.show()
+a.run()
