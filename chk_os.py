@@ -1,25 +1,43 @@
 import platform
+import subprocess
 
 
 class Adapter:
-    def __init__(self, run_app):
+    def __init__(self):
         self._check_os = platform.system()
-        self._run_os = None
-        self._check_system(run_app)
+        self.os_dict = {
+            "Darwin": self.osx,
+            "Windows": self.windows10,
+            "Linux": self.linux
+        }
 
-    def _check_system(self, run_app):
-        if self._check_os == "Linux":
-            self._run_os = run_app
-        elif self._check_os == "Darwin":
-            self._run_os = run_app
-        elif self._check_os == "Windows":
-            self._run_os = run_app
-        else:
-            print("Unknown OS")
+    def run_app(self):
+        if self.os_dict.get(self._check_os) is None:
+            return "OS not supported"
+        self.os_dict[self._check_os]()
 
-    def run(self):
-        return self._run_os
+    def osx(Self):
+        print("OSX")
+
+    def windows10(self):
+        print("windows 10")
+
+    def linux(self):
+        linux_type = subprocess.check_output(["lsb_release", "-is"]).decode("utf-8")[:-1]
+        linux_dict = {
+            "Ubuntu": self.ubuntu,
+            "Kali": self.kali
+        }
+        if linux_dict.get(linux_type) is None:
+            return "Linux OS not supported"
+        linux_dict[linux_type]()
+
+    def ubuntu(self):
+        print("ubuntu")
+
+    def kali(self):
+        print("kali")
 
 
 a = Adapter()
-a.run()
+a.run_app()
