@@ -8,8 +8,8 @@ def get_arguments():
     -o and -n arguments must be filled in when running app.
     -p is optional
     e.g.: python rename.py -o old_char -n new_char -p /usr/local
-    If replace space character, use a single \ as space character
-    e.g.: python rename.py -o \ -n new_char
+    If replace space character, use a single \ followed by a space character
+    e.g.: python rename.py -o \  -n new_char
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("-o", "--old", dest="old_character",
