@@ -1,14 +1,29 @@
+"""
+A simple script for renaming file or folder name(s).
+Features:
+1) replace character(s) with new character(s)
+2) add new character(s) before or after the filename
+3) delete character(s) in the filename
+4) all file or folder name(s) within the same location will be renamed
+5) set path location to rename file or folder name(s) remotely
+
+Tested on: OSX(mojave)
+
+TODO: add select option for renaming single or multiple filename(s)
+"""
+
 import argparse
 import os
 
 
 def get_arguments():
     """
-    -o must have argument data (must also have -n or -d)
-    -n must have argument data (must also have -o)
+    Options:
+    -o must include -n or -d
+    -n must include -o
     -d does not require argument to delete character (must also have -o)
-    -ap add new prefix character to filename by itself
-    -as add new suffix character to filename by itself
+    -ap add new prefix character (stand-alone)
+    -as add new suffix character (stand-alone)
     -p change and set path (optional)
     e.g.: python rename.py -o old_char -n new_char -p /usr/local
     If replace space character, use a single \ followed by a space character
@@ -22,9 +37,9 @@ def get_arguments():
     # Need to set action="store_true" to work without arguments
     parser.add_argument("-d", "--del", dest="delete", action="store_true",
                         help="delete old character(s) from file/folder names")
-    parser.add_argument("-ap", "--add_prefix", dest="prefix",
+    parser.add_argument("-ap", "--prefix", dest="prefix",
                         help="add new prefix character to file/folder names")
-    parser.add_argument("-as", "--add_suffix", dest="suffix",
+    parser.add_argument("-as", "--suffix", dest="suffix",
                         help="add new suffix character to file/folder names")
     parser.add_argument("-p", "--path", dest="path",
                         help="set path for app to rename files/folders")
