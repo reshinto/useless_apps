@@ -44,6 +44,11 @@ days = {
     }
 }
 
+voice = {
+    "jp": "Kyoko",
+    "en": "Samantha"
+}
+
 
 def jpMode(fc, city, lang):
     current_date = fc.currently.time.strftime("%Y年%m月%d日")
@@ -111,7 +116,7 @@ def main(city, lang="en"):
         say_output, show_output = enMode(fc, city, "en")
 
     print(show_output)
-    subprocess.check_output(["say", say_output])
+    subprocess.check_output(["say", "-v", voice[lang], say_output])
 
 
 if __name__ == "__main__":
