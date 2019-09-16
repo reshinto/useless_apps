@@ -1,3 +1,4 @@
+import sys
 import os
 import subprocess
 
@@ -7,7 +8,7 @@ def runCommand(command):
     return subprocess.check_output(command, shell=True).decode().strip()
 
 
-def getGithubCommands(project_name):
+def createGithubRepo(project_name):
     return [
         f"curl -u '{os.environ.get('githubUser')}' "
         "https://api.github.com/user/repos -d '"
@@ -19,5 +20,9 @@ def getGithubCommands(project_name):
     ]
 
 
-if __name__ == "__main__:
-    runCommand(getGithubCommands("test"))
+if __name__ == "__main__":
+    try:
+        project_name = sys.argv[1]
+        runCommand(createGithubRepo(f"{project_name}"))
+    except:
+        print("Something went wrong!")
