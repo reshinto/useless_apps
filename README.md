@@ -1,44 +1,43 @@
 # Useless Apps
 
 ## Overview
-This repository collects small Python utilities and shell scripts that automate email workflows, manage files, integrate with public APIs, and convert media. Each tool can be run independently, making it easy to reuse the code snippets for personal tasks or as a starting point for new experiments.
+This repository curates 22 tracked files spanning Python (14 files), Shell (6 files), YAML (1 files) and Text (1 files). It showcases automation around data analysis workflows, ci/cd automation, HTTP integrations and command-line interfaces. Expect utilities for audio extraction utilities, media conversion scripts, email automation helpers, repository setup tooling and market data ingestion.
 
-## Features
-### Email utilities
-- **sendEmailAuto.py** – Sends preconfigured Gmail messages with optional attachments using credentials from environment variables.
-- **sendEmailPrompt.py** – Prompts for recipients, subject, body, and optional attachments before sending mail through Gmail.
-- **waiting_instruction.py** – Monitors a Gmail inbox for new commands, replies automatically, and can trigger local automation such as launching an alarm script.
-- **emailLib.py** – Provides IMAP helpers for connecting to servers, listing folders, counting messages, searching, and deleting mail.
+## Key Features
+- **chk_os.py** — Identify the current operating system and run platform-specific hooks. It detects the host operating system and invokes system commands. The Adapter class coordinates operating-system routines such as Run App, macOS, Windows 10, Linux and other helpers.
+- **clone.sh** — Clone a Git repository into a specified directory with a single command. Run `chmod +x clone.sh` once, then call `./clone.sh <repo-url> <target-dir>`. It clones remote Git repositories into the requested directory.
+- **createRepo.py** — Bootstrap a Git repository locally and create the remote on GitHub. It touches the local filesystem and environment variables and invokes system commands. Run commands in the terminal.
+- **videoToMp3/mkvToH264.sh** — It converts media files with FFmpeg.
+- **emailLib.py** — Helpers for authenticating with IMAP servers and managing mailboxes. It monitors inbox folders. The Email Account class coordinates key routines such as Get Server Address. The Use IMAP class coordinates key routines such as Get IMAP Server, Select Folder, Get Folder List, Get Num Of Emails and other helpers.
+- **videoToMp3/mkvToMp3.sh** — It converts media files with FFmpeg.
+- **filelib.py** — Utilities for creating, inspecting, and editing files on disk. It touches the local filesystem and environment variables. The File System class coordinates key routines such as Set Path, Get Contents, Create File, Use Default Path and other helpers.
+- **videoToMp3/mp4ToH264.sh** — It converts media files with FFmpeg.
+- **iex.py** — IEX API data. It parses and emits JSON payloads, structures data with pandas DataFrames and communicates with HTTP services. IEX API.
+- **videoToMp3/mp4ToMp3.sh** — It converts media files with FFmpeg.
+- **jsonToPanda.py** — Converts JSON to table for readability with pandas api. It structures data with pandas DataFrames. [+] Converts JSON file from IEX API into a table with pandas dataframe api.
+- **videoToMp3/webmToMp3.sh** — It converts media files with FFmpeg.
+- **reindent.py** — CLI utility to convert indentation widths for a text file. It touches the local filesystem and environment variables. The Reindent class coordinates key routines such as Is Exist, Get Contents and Reindent.
+- **rename_files.py** — A simple script for renaming file or folder name(s). Key highlights: replace character(s) with new character(s), add new character(s) before or after the filename, delete character(s) in the filename. It parses command-line arguments for flexible execution and touches the local filesystem and environment variables. The Rename class coordinates key routines such as Rename.
+- **rpn.py** — Evaluate reverse Polish notation expressions with verbose tracing.
+- **sendEmailAuto.py** — Send templated emails to multiple recipients using SMTP. It builds MIME email messages, touches the local filesystem and environment variables and sends transactional email via SMTP.
+- **sendEmailPrompt.py** — Prompt-based email composer that collects recipients and sends via SMTP. It builds MIME email messages, touches the local filesystem and environment variables and sends transactional email via SMTP.
+- **text_to_mp3/run.py** — Convert each line in `text.txt` into spoken audio and export MP3 files. It invokes system commands.
+- **waiting_instruction.py** — Automates a Gmail-driven workflow that launches a local alarm clock app. It builds MIME email messages, monitors inbox folders, touches the local filesystem and environment variables and sends transactional email via SMTP. Open a command prompt and start the Windows alarm-volume-control app.
+- **weather.py** — Generate Dark Sky forecasts and read them aloud in English or Japanese. It retrieves weather insights from Dark Sky, touches the local filesystem and environment variables and invokes system commands.
 
-### File and text helpers
-- **filelib.py** – Supplies reusable functions for creating, reading, and editing files with configurable defaults.
-- **rename_files.py** – Renames files or folders by replacing text, deleting segments, or adding prefixes and suffixes.
-- **reindent.py** – Rewrites files with a new indentation width based on command-line parameters.
+## Getting Started
+1. Clone the repository and open it in your preferred development environment.
+2. Create a virtual environment and install the required Python packages.
 
-### Automation scripts
-- **chk_os.py** – Detects the host operating system and prints diagnostic messages via dedicated handlers.
-- **createRepo.py** – Builds shell commands to create a GitHub repository and push the local project, reading the username from environment variables.
-- **waiting_instruction.py** – Uses pyautogui and keyboard libraries to automate launching a separate alarm application when instructed by email.
-
-### Data and API clients
-- **iex.py** – Retrieves market data from the IEX Trading API, including batch requests, book data, and charts.
-- **jsonToPanda.py** – Normalizes IEX JSON responses with pandas utilities to compose chart datasets and merged DataFrames.
-- **weather.py** – Fetches Dark Sky forecasts for predefined cities, prints localized summaries, and speaks the forecast with macOS voices.
-
-### Media and conversion tools
-- **text_to_mp3/run.py** – Reads lines from text.txt, uses macOS say to generate AIFF files, converts them to MP3 with lame, and cleans up intermediates.
-- **videoToMp3/*.sh** – Provide ffmpeg helpers for converting MKV, MP4, or WebM videos to MP3 audio or H.264 video streams.
-
-### Miscellaneous examples
-- **rpn.py** – Implements a simple stack-based calculator that prints debug information for each operation.
-
-## Environment variables
-Several scripts expect credentials or API tokens to be available as environment variables:
-- `my_email`, `my_email_password` – Gmail account used by the email sender and watcher utilities.
-- `githubUser` – GitHub username used when provisioning repositories from the CLI helper.
-- `weather_api_key` – Dark Sky API key required for weather forecasts.
-
-Ensure these values are exported in your shell before running the respective scripts.
-
-## Requirements
-Many scripts target macOS utilities such as `say` and rely on third-party binaries like `lame` and `ffmpeg` for media conversion. API-focused scripts use Python packages including `pandas`, `requests`, `darksky`, `pyautogui`, and `keyboard`. Install the necessary tools and libraries before executing the corresponding utilities.
+## Running the Project
+Use these commands to explore key entry points:
+- `bash clone.sh`
+- `python createRepo.py`
+- `python iex.py`
+- `python jsonToPanda.py`
+- `python reindent.py`
+- `python rename_files.py`
+- `bash videoToMp3/mkvToH264.sh`
+- `bash videoToMp3/mkvToMp3.sh`
+- `bash videoToMp3/mp4ToH264.sh`
+- `bash videoToMp3/mp4ToMp3.sh`
